@@ -308,7 +308,17 @@ namespace RuntimeInspectorNamespace
 			}
 		}
 
-		private RuntimeInspector.HeaderVisibility m_headerVisibility = RuntimeInspector.HeaderVisibility.Collapsible;
+        public void ExpandRecursive()
+        {
+            if (!IsExpanded)
+                IsExpanded = true;
+
+            foreach (var element in elements)
+                if (element is ExpandableInspectorField exField)
+                    exField.ExpandRecursive();
+        }
+
+        private RuntimeInspector.HeaderVisibility m_headerVisibility = RuntimeInspector.HeaderVisibility.Collapsible;
 		public RuntimeInspector.HeaderVisibility HeaderVisibility
 		{
 			get { return m_headerVisibility; }

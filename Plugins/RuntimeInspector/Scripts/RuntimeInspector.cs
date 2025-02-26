@@ -494,10 +494,13 @@ namespace RuntimeInspectorNamespace
 					inspectedObjectDrawer.NameRaw = obj.GetNameWithType();
 					inspectedObjectDrawer.Refresh();
 
-					if( inspectedObjectDrawer is ExpandableInspectorField )
-						( (ExpandableInspectorField) inspectedObjectDrawer ).IsExpanded = true;
+                    //if( inspectedObjectDrawer is ExpandableInspectorField )
+                    //	( (ExpandableInspectorField) inspectedObjectDrawer ).IsExpanded = true;
 
-					currentDrawer = inspectedObjectDrawer;
+                    if (inspectedObjectDrawer is ExpandableInspectorField efield)
+                        efield.ExpandRecursive();
+
+                    currentDrawer = inspectedObjectDrawer;
 					if( currentDrawer is ExpandableInspectorField )
 						( (ExpandableInspectorField) currentDrawer ).HeaderVisibility = m_inspectedObjectHeaderVisibility;
 
